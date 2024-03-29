@@ -1,10 +1,8 @@
-//  const  MongoClient = require('mongodb').MongoClient
 const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
 
   let _dbConnection
-//  const uir = "mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Books?ssl=true&authSource=admin";
- 
-//  const link = 'mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Contacts?ssl=true&authSource=admin'
+
 
 
 
