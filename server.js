@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const mongodb = require('./model/db');
 const professionalRoutes = require('./routes/index');
+require('dotenv').config();
+
 
 
 

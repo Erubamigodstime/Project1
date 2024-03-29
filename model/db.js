@@ -2,10 +2,9 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
   let _dbConnection
- const uir = "mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Books?ssl=true&authSource=admin";
- const url = 'mongodb+srv://erubamigodstime:godstime@cse340.uclncjl.mongodb.net/Contacts';
+//  const uir = "mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Books?ssl=true&authSource=admin";
  
- const link = 'mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Contacts?ssl=true&authSource=admin'
+//  const link = 'mongodb://atlas-sql-66031ecfd7650526f26cd240-wd5ag.a.query.mongodb.net/Contacts?ssl=true&authSource=admin'
 
 
 
@@ -15,10 +14,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
         return clb(null, _dbConnection)
         
     }
-    MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true,  auth: {
-        username: 'erubamigodstime',
-        password: 'godstime'
-      } })
+    MongoClient.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true,   })
     .then((client)=>{
         _dbConnection = client;
         console.log('server connected')
