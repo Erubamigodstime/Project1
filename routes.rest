@@ -1,0 +1,41 @@
+# LOCALHOST
+### Get users by Id
+Get http://localhost:8080/users/getone/6604ab4f0f75a3643c6fa7fe HTTP/1.1
+
+### Get all users
+Get http://localhost:8080/users/getall HTTP/1.1
+
+
+### Create a single user
+Post http://localhost:8080/users/create HTTP/1.1
+content-Type: application/json
+
+{ 
+  "firstName": "Victory",
+  "lastName": "Briggs",
+  "email": "victory.briggs@gmail.com",
+  "favoriteColor": "Brown",
+  "birthday": "1994-09-04"
+}
+
+
+### update user with an Id
+Put http://localhost:8080/users/update/6611f46634aae2b80f950ebf HTTP/1.1
+content-Type: application/json
+
+{ 
+  "firstName": "Victory",
+  "lastName": "Briggs",
+  "email": "victory.briggs@gmail.com",
+  "favouriteColor": "Brown",
+  "birthday": "1994-09-04"
+}
+
+
+
+### Delete user with an Id
+Delete http://localhost:8080/users/delete/6611ec7cdfac2751163bd80e HTTP/1.1
+
+
+
+

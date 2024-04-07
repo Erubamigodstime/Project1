@@ -1,13 +1,18 @@
-const routes = require ('express').Router();
-const myController = require('../controllers/controller1');
-// const { getData } = require('../controller1.js');
+const routes = require('express').Router();
+const user = require('./user');
+const swaggerRoutes = require('./swagger')
 
 
+routes.use('/', swaggerRoutes)
+routes.use('/users', user);
+// routes.use(
+//   '/',
+//   (docData = (req, res) => {
+//     let docData = {
+//       documentationURL: 'https://nathanbirch.github.io/nathan-byui-api-docs',
+//     };
+//     res.send(docData);
+//   })
+// );
 
-routes.get('/', myController.homePage);
-routes.get('/user', myController.getAll);
-routes.get('/:id', myController.getOne);
-
-
-
-module.exports = routes
+module.exports = routes;

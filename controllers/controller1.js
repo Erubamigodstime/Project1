@@ -1,4 +1,3 @@
-// const { ObjectId } = require('bson');
 const mongodb = require('../model/db');
 const ObjectId = require('mongodb').ObjectId
 
@@ -48,7 +47,88 @@ const getAll = async (req, res, next) => {
     res.status(500).send('An error occurred while retrieving the data.');
   }
 };
-module.exports = { getOne, getAll, homePage };
+
+const createUser = async (req, res, next) => {
+  try {
+    console.log(req);
+    console.log(req.body);
+
+    const user = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      favouriteColor: req.body.favouriteColor,
+      birthday: req.body.birthday
+    }
+    const collection = mongodb.getDb().db().collection('users');
+    const initialCount = collection.countDocuments();
+    await collection.insertOne(user);
+    const newCount = collection.countDocuments();
+    // Checking whether a document was added or not by comparing counts before and after adding an item
+    res.setHeader('Content-Type', 'application/json');
+    if (initialCount == newCount) {
+      throw Error("Failed to add a new user.");
+    } else {
+      res.status(201).json({ message: "User created successfully." });       
+    
+  }} catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while retrieving the data.');
+  }
+};
+
+const updateUser = async (req, res, next) => {
+  try {
+    const userId = new ObjectId (req.params.id);
+    const user = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      favouriteColor: req.body.favouriteColor,
+      birthday: req.body.birthday
+    }
+    const collection = mongodb.getDb().db().collection('users');    
+    await collection.replaceOne({_id: userId}, user);   
+       
+    res.setHeader('Content-Type', 'application/json');    
+    res.status(201).json({ message: "User updated successfully." });
+
+       
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(`Unable to Update user with ${userId}.`);
+    
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const userId = new ObjectId (req.params.id);
+    const user = {
+      firstName: req.firstName,
+      lastName: req.lastName,
+      email: req.email,
+      favouriteColor: req.favouriteColor,
+      birthday: req.birthday
+    }
+    const collection = mongodb.getDb().db().collection('users');
+    
+    await collection.remove({_id: userId},user);   
+       
+    res.setHeader('Content-Type', 'application/json');
+    if (response.deletedCount > 0) {
+      res.status(201).json({ message: "User updated successfully." });
+      
+    }else{
+      res.status(500).send(`Unable to delete user with ${userId}.`);
+
+    }    
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while retrieving the data.');
+  }
+};
+module.exports = { getOne, getAll, homePage, updateUser, createUser, deleteUser };
 
 
 

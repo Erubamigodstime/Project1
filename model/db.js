@@ -1,9 +1,7 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
   let _dbConnection
-
-
 
 
  const connectToDb = (clb) =>{
@@ -16,22 +14,15 @@ require('dotenv').config();
     .then((client)=>{
         _dbConnection = client;
         console.log('server connected')
-        clb(null, _dbConnection)
-       
+        clb(null, _dbConnection)      
 
   
     })
     .catch(err => {
         console.log(err)
         return clb(err)
-    })   
-
-
+    })  
  };
-
-
-
-
 
  const getDb = () => {
     if (!_dbConnection) {

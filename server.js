@@ -6,11 +6,13 @@ const professionalRoutes = require('./routes/index');
 require('dotenv').config();
 
 
+const app = express();
+
 
 
 const {connectToDb, getDb} = require('./model/db')
 
-const app = express();
+
 const port = process.env.PORT || 8080;
 
 
@@ -23,7 +25,7 @@ app
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
-  .use(professionalRoutes);
+  .use('/', professionalRoutes);
 
 mongodb.connectToDb((err, mongodb) => {
   if (err) {
